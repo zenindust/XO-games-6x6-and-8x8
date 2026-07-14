@@ -85,25 +85,21 @@ class XOApp:
         if self.board[r][c] == ' ' and not self.game_over:
             # Ghi nhận nước đi vào mảng dữ liệu
             self.board[r][c] = self.current_player
-            
             # Hiển thị ký tự lên giao diện đồ họa
             color = "#e74c3c" if self.current_player == "X" else "#3498db"
             self.buttons[r][c].config(text=self.current_player, state=tk.DISABLED, disabledforeground=color, bg="#ffffff")
-
             # Kiểm tra xem nước đi này có giúp người chơi chiến thắng không
             if self.check_winner(r, c):
                 self.game_over = True
                 self.status_label.config(text=f"Người chơi {self.current_player} THẮNG CUỘC!", fg="#2ecc71")
                 messagebox.showinfo("Kết quả", f"Chúc mừng! Người chơi {self.current_player} đã chiến thắng!")
                 return
-
             # Kiểm tra hòa (hết ô trống)
             if self.is_board_full():
                 self.game_over = True
                 self.status_label.config(text="KẾT QUẢ: HÒA NHAU!", fg="#95a5a6")
                 messagebox.showinfo("Kết quả", "Trận đấu hòa!")
                 return
-
             # Đổi lượt chơi sang người tiếp theo
             self.current_player = "O" if self.current_player == "X" else "X"
             next_color = "#e74c3c" if self.current_player == "X" else "#3498db"
@@ -113,24 +109,20 @@ class XOApp:
         """Thuật toán kiểm tra thắng cuộc quanh vị trí ô cờ vừa đánh (Tối ưu hóa hiệu năng)"""
         directions = [(0, 1), (1, 0), (1, 1), (1, -1)] # Ngang, Dọc, Chéo xuôi \, Chéo ngược /
         player_char = self.board[r][c]
-
         for dr, dc in directions:
             count = 1  # Đếm chính ô vừa đánh
-
             # Đếm tiến theo một hướng
             nr, nc = r + dr, c + dc
             while 0 <= nr < self.size and 0 <= nc < self.size and self.board[nr][nc] == player_char:
                 count += 1
                 nr += dr
                 nc += dc
-
             # Đếm lùi theo hướng ngược lại
             nr, nc = r - dr, c - dc
             while 0 <= nr < self.size and 0 <= nc < self.size and self.board[nr][nc] == player_char:
                 count += 1
                 nr -= dr
                 nc -= dc
-
             # Nếu chuỗi đạt hoặc vượt quá điều kiện thắng thì trả về kết quả thắng
             if count >= self.win_condition:
                 return True
