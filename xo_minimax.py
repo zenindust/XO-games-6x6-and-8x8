@@ -23,34 +23,27 @@ class XOApp:
         """Tạo thanh chọn chế độ chơi ở phía trên ứng dụng"""
         menu_frame = tk.Frame(self.root, bg="#34495e", padx=10, pady=10)
         menu_frame.pack(fill=tk.X, side=tk.TOP)
-
         title_label = tk.Label(menu_frame, text="CHẾ ĐỘ CHƠI:", font=("Arial", 12, "bold"), fg="white", bg="#34495e")
         title_label.pack(side=tk.LEFT, padx=10)
-
         # Nút chọn 6x6
         btn_6x6 = tk.Button(menu_frame, text="Bàn cờ 6x6 (Thắng 4)", font=("Arial", 10, "bold"),
                             bg="#e67e22", fg="white", command=lambda: self.start_new_game(6, 4))
         btn_6x6.pack(side=tk.LEFT, padx=5)
-
         # Nút chọn 8x8
         btn_8x8 = tk.Button(menu_frame, text="Bàn cờ 8x8 (Thắng 5)", font=("Arial", 10, "bold"),
                             bg="#9b59b6", fg="white", command=lambda: self.start_new_game(8, 5))
         btn_8x8.pack(side=tk.LEFT, padx=5)
-
         # Nút chơi lại
         btn_reset = tk.Button(menu_frame, text="Chơi lại", font=("Arial", 10, "bold"),
                              bg="#2ecc71", fg="white", command=self.reset_game)
         btn_reset.pack(side=tk.RIGHT, padx=10)
-
         # Nhãn hiển thị lượt đi hiện tại
         self.status_label = tk.Label(self.root, text="Lượt đi: Người chơi X", font=("Arial", 14, "bold"), 
                                      fg="#f1c40f", bg="#2c3e50", pady=10)
         self.status_label.pack(side=tk.TOP)
-
         # Khung chứa bàn cờ chính
         self.board_frame = tk.Frame(self.root, bg="#2c3e50")
         self.board_frame.pack(expand=True)
-
         # Khởi tạo game 6x6 mặc định khi mở app
         self.start_new_game(6, 4)
 
