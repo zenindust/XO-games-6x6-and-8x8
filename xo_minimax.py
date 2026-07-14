@@ -1,13 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
-
 class XOApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Ứng dụng Game XO Mở Rộng")
         self.root.geometry("600x680")
         self.root.configure(bg="#2c3e50")
-        
         # Cấu hình mặc định ban đầu
         self.size = 6
         self.win_condition = 4
@@ -15,10 +13,8 @@ class XOApp:
         self.board = []
         self.buttons = []
         self.game_over = False
-
         # Giao diện menu chọn kích thước bàn cờ
         self.create_menu()
-
     def create_menu(self):
         """Tạo thanh chọn chế độ chơi ở phía trên ứng dụng"""
         menu_frame = tk.Frame(self.root, bg="#34495e", padx=10, pady=10)
@@ -52,20 +48,16 @@ class XOApp:
         self.size = size
         self.win_condition = win_condition
         self.reset_game()
-
     def reset_game(self):
         """Đặt lại trạng thái bàn cờ"""
         self.current_player = "X"
         self.game_over = False
         self.status_label.config(text="Lượt đi: Người chơi X", fg="#e74c3c")
         self.board = [[' ' for _ in range(self.size)] for _ in range(self.size)]
-        
         # Xóa các nút cũ trên giao diện nếu có
         for widget in self.board_frame.winfo_children():
             widget.destroy()
-
         self.buttons = [[None for _ in range(self.size)] for _ in range(self.size)]
-
         # Tạo ma trận nút nhấn (Grid) tương ứng với kích thước bàn cờ
         for r in range(self.size):
             for c in range(self.size):
